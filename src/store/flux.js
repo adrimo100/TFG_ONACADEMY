@@ -1,7 +1,14 @@
+
 const getState = ({getStore, getActions, setStore}) => {
+    const backendUrl = process.env.BACKEND_URL;
+
     return {
-        store: {},
-        actions: {}
+        store: {user: {}},
+        actions: {
+            createUser: async (newUser) => {
+                alert("creating new user")
+            }
+        }
     }
 }
 
