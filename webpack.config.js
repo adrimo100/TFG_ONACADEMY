@@ -10,7 +10,10 @@ const ruleForJavaScript = {
             ["@babel/preset-react", {
                 runtime: "automatic" //to not have to manually import react
             }]
-        ]//Babel configuration for React
+        ], //Babel configuration for React
+        plugins: [
+            "@babel/plugin-proposal-throw-expressions"
+        ]
     }
 }
 

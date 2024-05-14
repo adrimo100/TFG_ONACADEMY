@@ -2,6 +2,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import injectContext from "./store/context";
 import { Home, Register, Login } from "./views/index";
 import { Navbar } from "./components/index"
+import { Toaster } from "react-hot-toast";
 
 const Layout = () => {
 
@@ -15,6 +16,10 @@ const Layout = () => {
                     <Route path="/login" element={<Login/>}/>
                     <Route path="*" element={<h1>Not Found</h1>}/>
                 </Routes>
+                <Toaster
+                    position="top-right"
+                    reverseOrder={false}
+                />
             </BrowserRouter>
         </div>
     )

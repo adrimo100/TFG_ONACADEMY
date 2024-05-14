@@ -21,18 +21,18 @@ const Register = () => {
         event.preventDefault();
         setError('');
 
-        if (newUser.name.length > 65) {
-            setError('El nombre debe tener máximo 65 caracteres.');
+        if (!newUser.name || newUser.name?.length > 65) {
+            setError('Introduce un nombre valáido de máximo 65 caracteres.');
             return;
         }
 
-        if (!validateEmail(newUser.email) || newUser.email.length > 65) {
+        if (!validateEmail(newUser.email) || newUser.email?.length > 65) {
             setError('Introduce un correo electrónico válido con máximo 65 caracteres.');
             return;
         }
 
-        if (newUser.password.length > 20) {
-            setError('La contraseña debe tener máximo 20 caracteres.');
+        if (!newUser.password || newUser.password?.length > 20) {
+            setError('Introduce una contraseña válida con máximo 20 caracteres.');
             return;
         }
 
