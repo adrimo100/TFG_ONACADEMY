@@ -1,7 +1,8 @@
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import injectContext from "./store/context";
-import { Home, Register, Login } from "./views/index";
-import { Navbar } from "./components/index"
+import { Home, Register, Login } from "./views";
+import { Navbar } from "./components"
+import { Footer } from "./components/footer/footer";
 import { Toaster } from "react-hot-toast";
 
 const Layout = () => {
@@ -20,6 +21,7 @@ const Layout = () => {
                     position="top-right"
                     reverseOrder={false}
                 />
+                <Footer/>
             </BrowserRouter>
         </div>
     )

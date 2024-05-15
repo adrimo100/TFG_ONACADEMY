@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import getState from "./flux";
+import {getToken} from "../utils/tokenHandler";
 
 export const Context = React.createContext(null) //Creates the context, with null as initial value for components without access to the provider
 
@@ -25,6 +26,13 @@ const injectContext = (PassedComponent) => {
              * store, instead use actions, like this:
              * state.actions.getAuthenticatedUser();
              **/
+
+            const token = getToken();
+
+            if(token) {
+                state.actions.getAuthenticatedUser(token)
+            }
+
         }, []);
 
         return (
