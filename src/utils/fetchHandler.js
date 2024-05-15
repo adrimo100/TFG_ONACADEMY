@@ -1,4 +1,4 @@
-import {getToken} from "./getToken";
+import { getToken}  from "./tokenHandler";
 
 export const fetchHandler =  (path, requestInit = {}, authenticated = false) => {
     const url = process.env.BACKEND_URL + path;
