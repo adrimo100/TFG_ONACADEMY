@@ -5,13 +5,22 @@ import { Navbar } from "./components"
 import { Footer } from "./components/footer/footer";
 import { Toaster } from "react-hot-toast";
 
+const lyoutStyles = {
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    position: "relative",
+    paddingBottom:"90px"
+}
+
 const Layout = () => {
 
     return (
-        <div>
+        <div style={lyoutStyles}>
             <BrowserRouter>
                 <Navbar></Navbar>
-                <Routes>
+                <Routes>s
                     <Route path="/" element={<Home/>}/>
                     <Route path="/register" element={<Register/>}/>
                     <Route path="/login" element={<Login/>}/>

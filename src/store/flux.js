@@ -1,11 +1,14 @@
-import {fetchHandler} from "../utils/fetchHandler";
+import {fetchHandler} from "../utils/fetch-handler";
 import toast from "react-hot-toast";
-import {removeToken, setToken} from "../utils/tokenHandler";
+import {removeToken, setToken} from "../utils/token-handler";
 
 const getState = ({getStore, getActions, setStore}) => {
 
     return {
-        store: {user: null},
+        store: {
+            user: null,
+            subjects: []
+        },
         actions: {
             createUser: async (newUser) => {
                 fetchHandler("/api/user", {
@@ -90,12 +93,37 @@ const getState = ({getStore, getActions, setStore}) => {
 
                     })
                     .catch(e => {
+                        removeToken();
                         console.error('Error:', e);
                     });
             },
             closeSession: () => {
                 removeToken()
                 setStore({user: null})
+            },
+            getAllSubjects: () => {
+                fetchHandler("/api/subject", {
+                    method: "GET",
+                })
+                    .then(res => {
+                        if (!res.ok) {
+                            return res.text().then(data => {
+                                throw new Error(data || 'Could not recover subjects list');
+                            });
+                        }
+
+                        return res.json();
+                    })
+                    .then(data => {
+
+                        setStore({
+                            subjects: [...data]
+                        })
+
+                    })
+                    .catch(e => {
+                        console.error('Error:', e);
+                    });
             }
         }
     }

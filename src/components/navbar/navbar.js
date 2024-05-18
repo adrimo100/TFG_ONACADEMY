@@ -33,7 +33,7 @@ const Navbar = () => {
     }
 
     return (
-        <nav className="navbar bg-dark bg-body-tertiary" data-bs-theme="dark">
+        <nav className="navbar bg-dark bg-body-tertiary" data-bs-theme="dark" style={{position: "sticky", top: 0}}>
             <header className="navbar-brand d-flex w-100">
                 <div className="container-fluid">
                     <button className="btn btn-warning me-2" type="button"><span className="fw-bold"

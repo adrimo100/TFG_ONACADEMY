@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import getState from "./flux";
-import {getToken} from "../utils/tokenHandler";
+import {getToken} from "../utils/token-handler";
 
 export const Context = React.createContext(null) //Creates the context, with null as initial value for components without access to the provider
 

@@ -1,0 +1,195 @@
+/*
+    home.css: This website contains selectors only used in home.css
+
+    All pages share the styles on index.css but you should create
+    one more css for each page that will contain the selected used
+    on that page only (the ones not reused in other pages).
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@300&family=Roboto:wght@500&display=swap");
+
+#first-header {
+    height: 600px;
+    background: url("https://images.unsplash.com/photo-1504275107627-0c2ba7a43dba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80"),
+    #000000;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+#first-hearder-filter {
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    height: 100%;
+    padding: 0%;
+    margin: 0%;
+}
+
+#first-hearder-text-background {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 5px;
+}
+
+#title-text {
+    font-family: "M PLUS 1 Code", sans-serif;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 6vw;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    vertical-align: center;
+
+    color: #ffffff;
+
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+#subtitle-text {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.4vw;
+    line-height: 21px;
+    text-align: center;
+
+    color: #ffffff;
+
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+#second-header {
+    height: fit-content;
+    width: 100%;
+    margin: 0%;
+    background: #FFCA2C;
+}
+
+@media screen and (max-width: 992px) {
+    #first-header {
+        height: 400px;
+        background-repeat: repeat;
+    }
+
+    #subtitle-text {
+        display: none;
+    }
+
+    #second-header {
+        height: 1000px;
+    }
+}
+
+#subjects-title-banner {
+    height: 100px;
+    border-radius: 5px;
+}
+
+#no-subject-alert {
+    background-color: rgb(255, 168, 0);
+
+    border-radius: 5px;
+}
+
+#dashboard-avatar{
+    height: 160px;
+    width: 160px;
+    border-radius: 50%;
+    border: solid 2px rgba(0, 0, 0, 0.6);
+    object-fit: cover;
+}
+
+input[type=file]{
+    border-radius: 5px;
+}
+
+input[type=file]::-webkit-file-upload-button {
+    background: #198754;
+    color: white;
+
+    border-radius: 5px 0 0px 5px;
+}
+
+.form-control:hover:not(:disabled):not([readonly])::file-selector-button {
+    background-color: #157347;
+}
+
+.card-text {
+    width: 93%;
+}
+
+.btn {
+    border-radius: 5px;
+}
+
+.card {
+    filter: drop-shadow(2px 8px 10px rgba(0, 0, 0, 0.25));
+    border-radius: 5px;
+    height: 450px;
+}
+
+.card-img-top {
+    border-radius: 5px 5px 0px 0px;
+    width: 100%;
+
+    height: 150px;
+}
+
+.details-box {
+    height: 67%;
+}
+
+.card-text {
+    position: absolute;
+    top: 50%;
+}
+
+.subject-btn {
+    position: absolute;
+    bottom: 5%;
+}
+
+.nowrap{
+    white-space: nowrap;
+}
+
+.subjects {
+    padding-top: 20px;
+    background-color: rgb(255, 168, 0);
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+.subjects__list {
+    background: #2B3035;
+    width: 90%;
+    height: 90%;
+    padding: 5%;
+
+    border-radius: 5px;
+    margin: auto;
+}
+
+@media screen and (min-width: 991px){
+    .feature-description{
+        position: relative;
+        height: 15rem;
+    }
+
+    .details-column{
+        position: relative;
+        top: 12%
+    }
+}
+
+@media screen and (max-width: 767px) {
+    #title-text {
+        font-size: 10vw;
+    }
+}
+
+input {
+    border-radius: 5px;
+}
