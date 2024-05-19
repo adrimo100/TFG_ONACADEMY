@@ -1,0 +1,53 @@
+
+.subject-page {
+    background-color: rgb(255, 168, 0);
+    padding: 0;
+    margin: 0;
+
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.course-image {
+    height: 200px;
+    width: 100%;
+
+    object-fit: cover;
+    display: block;
+
+}
+
+.subject-details {
+    background-color: aliceblue;
+
+    height: fit-content;
+    margin: 10px 5px;
+    padding: 10px;
+
+    width: 80%;
+
+    border-radius: 20px;
+
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+}
+
+.courses-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.accordion {
+    width: 80%;
+
+    border-radius: 20px;
+}
+
+.accordion-body {
+    display: flex;
+    flex-direction: column;
+}

@@ -1,13 +1,18 @@
 import {fetchHandler} from "../utils/fetch-handler";
 import toast from "react-hot-toast";
-import {removeToken, setToken} from "../utils/token-handler";
+import {removeToken, setToken, getToken} from "../utils/token-handler";
 
 const getState = ({getStore, getActions, setStore}) => {
 
     return {
         store: {
             user: null,
-            subjects: []
+            subjects: [],
+            currentSubject: null,
+            courses: [],
+            usersCourses: [],
+            currentUserCourse: null,
+            currentCourse: null,
         },
         actions: {
             createUser: async (newUser) => {
@@ -123,6 +128,125 @@ const getState = ({getStore, getActions, setStore}) => {
                     })
                     .catch(e => {
                         console.error('Error:', e);
+                        toast(e.message,{type: "error"});
+                    });
+            },
+            getSubjectById: (subjectId) => {
+                fetchHandler(`/api/subject/${subjectId}`, {
+                    method: "GET",
+                })
+                    .then(res => {
+                        if(!res.ok) {
+                            return res.text().then(data => {
+                                throw new Error(data || 'Could not recover subject');
+                            });
+                        }
+
+                        return res.json();
+                    })
+                    .then(
+                        data => {
+                            setStore({
+                                currentSubject: {...data}
+                            })
+                        }
+                    )
+                    .catch(e => {
+                        console.error('Error:', e);
+                        toast(e.message,{type: "error"});
+                    });
+            },
+            getCoursesBySubject: (subjectId) => {
+                fetchHandler(`/api/course/subject/${subjectId}`,{
+                    method: "GET",
+                })
+                    .then(res => {
+                        if(!res.ok) {
+                            return res.text().then(data => {
+                                throw new Error(data || 'Could not recover courses by subjectId');
+                            });
+                        }
+
+                        return res.json();
+                    })
+                    .then(data => {
+                        setStore({
+                            courses: [...data]
+                        })
+                    })
+                    .catch(e => {
+                        console.error('Error:', e);
+                        toast(e.message,{type: "error"});
+                    });
+            },
+            getAllUserCoursesByUserId: (userId) => {
+               fetchHandler(`/api/usercourse/user/${userId}`, {
+                    method: "GET",
+                    headers: {
+                        Authorization : `Bearer ${getToken()}`
+                    }
+
+                })
+                    .then(res => {
+                        if(!res.ok) {
+                            return res.text().then(data => {
+                                throw new Error(data || 'Could not recover courses by subjectId');
+                            });
+                        }
+
+                        return res.json();
+                    })
+                    .then(data => {
+                        setStore({
+                            usersCourses: [...data]
+                        })
+                    })
+                    .catch(e => {
+                        console.error('Error:', e);
+                        toast(e.message,{type: "error"});
+                    });
+            },
+            createUserCourse: async (course, userId) => {
+
+                const userCourse = {
+                    courseName: course.name,
+                    userScore: 0
+                }
+
+                const body = {
+                    userCourse,
+                    userId,
+                    courseId: course.id,
+                }
+
+                await fetchHandler("/api/usercourse", {
+                    method: "POST",
+                    body,
+                    headers: {
+                        Authorization : `Bearer ${getToken()}`
+                    }
+                })
+                    .then(res => {
+                        if(!res.ok) {
+                            return res.text().then(data => {
+                                throw new Error(data || 'Could not create user course');
+                            });
+                        }
+
+                        return res.json();
+                    })
+                    .then(data => {
+
+                        setStore({
+                            currentUserCourse: data
+                        })
+
+                       getActions().getAllUserCoursesByUserId(userId);
+                    })
+                    .catch(e => {
+                        console.error('Error:', e);
+                        toast(e.message,{type: "error"});
+                        throw e;
                     });
             }
         }

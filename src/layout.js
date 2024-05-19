@@ -4,6 +4,7 @@ import { Home, Register, Login } from "./views";
 import { Navbar } from "./components"
 import { Footer } from "./components/footer/footer";
 import { Toaster } from "react-hot-toast";
+import Subject from "./views/subject/subject";
 
 const lyoutStyles = {
     width: "100%",
@@ -24,6 +25,7 @@ const Layout = () => {
                     <Route path="/" element={<Home/>}/>
                     <Route path="/register" element={<Register/>}/>
                     <Route path="/login" element={<Login/>}/>
+                    <Route path="/subject/:subjectId" element={<Subject/>}/>
                     <Route path="*" element={<h1>Not Found</h1>}/>
                 </Routes>
                 <Toaster
