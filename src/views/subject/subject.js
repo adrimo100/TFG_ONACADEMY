@@ -15,7 +15,7 @@ const Subject = () => {
     useEffect( () => {
        actions.getSubjectById(subjectId);
 
-        actions.getCoursesBySubject(subjectId);
+       actions.getCoursesBySubject(subjectId);
 
     }, []);
 
@@ -23,12 +23,14 @@ const Subject = () => {
         if(store.user){
             actions.getAllUserCoursesByUserId(store.user.id);
         }
+
     }, [store.user])
 
     const getCourseProgress = (course, userCourse) => {
 
         return (userCourse.userScore * 100) / course.maxScore;
     }
+
 
     const getCourseButtons = (course) => {
       const userCoursesFilteredByCourseId = store.usersCourses.filter(
@@ -37,12 +39,14 @@ const Subject = () => {
 
       const courseIsStarted = userCoursesFilteredByCourseId.length > 0;
 
+      const userCourse = userCoursesFilteredByCourseId[0];
+
       return (
         <React.Fragment>
           {courseIsStarted ? (
             <React.Fragment>
-              <div className="course-progress">
-                <strong>Progreso del curso: </strong>
+              <strong>Progreso del curso: </strong>
+              <div className="course-progress d-flex align-items-center">
                 <div
                   className="progress"
                   role="progressbar"
@@ -50,14 +54,16 @@ const Subject = () => {
                   aria-valuenow="0"
                   aria-valuemin="0"
                   aria-valuemax="100"
+                  style={{ width: "99%" }}
                 >
                   <div
                     className="progress-bar"
                     style={{
-                      width: `${getCourseProgress(course, userCoursesFilteredByCourseId[0])}%`,
+                      width: `${getCourseProgress(course, userCourse)}%`,
                     }}
                   ></div>
                 </div>
+                <strong className="ms-1">{getCourseProgress(course, userCourse)}%</strong>
               </div>
               <button
                 className="btn btn-success mt-2"
