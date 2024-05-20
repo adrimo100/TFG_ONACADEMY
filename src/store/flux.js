@@ -13,6 +13,7 @@ const getState = ({getStore, getActions, setStore}) => {
             usersCourses: [],
             currentUserCourse: null,
             currentCourse: null,
+            currentQuestion: null,
         },
         actions: {
             createUser: async (newUser) => {
@@ -242,6 +243,154 @@ const getState = ({getStore, getActions, setStore}) => {
                         })
 
                        getActions().getAllUserCoursesByUserId(userId);
+                    })
+                    .catch(e => {
+                        console.error('Error:', e);
+                        toast(e.message,{type: "error"});
+                        throw e;
+                    });
+            },
+            getCourse: (courseId) => {
+                fetchHandler(`/api/course/${courseId}`, {
+                    method: "GET",
+                    headers: {
+                        Authorization : `Bearer ${getToken()}`
+                    }
+                })
+                    .then(res => {
+                        if(!res.ok) {
+                            return res.text().then(data => {
+                                throw new Error(data || 'Could not get course');
+                            });
+                        }
+
+                        return res.json();
+                    })
+                    .then(data => {
+
+                        setStore({
+                            currentCourse: data
+                        })
+
+                    })
+                    .catch(e => {
+                        console.error('Error:', e);
+                        toast(e.message,{type: "error"});
+                        throw e;
+                    });
+            },
+            getUserCourseByUserIdAndCourseId: (userId, courseId) => {
+                fetchHandler(`/api/usercourse/user/${userId}/course/${courseId}`, {
+                    method: "GET",
+                    headers: {
+                        Authorization : `Bearer ${getToken()}`
+                    }
+                })
+                    .then(res => {
+                        if(!res.ok) {
+                            return res.text().then(data => {
+                                throw new Error(data || 'Could not get user course');
+                            });
+                        }
+
+                        return res.json();
+                    })
+                    .then(data => {
+
+                        setStore({
+                            currentUserCourse: data
+                        })
+
+                    })
+                    .catch(e => {
+                        console.error('Error:', e);
+                        toast(e.message,{type: "error"});
+                        throw e;
+                    });
+            },
+            getRandomQuestionByCourseIdAndLevel: (courseId, levelNumber) => {
+                fetchHandler(`/api/question/course/${courseId}/level/${levelNumber}`, {
+                    method: "GET",
+                    headers: {
+                        Authorization : `Bearer ${getToken()}`
+                    }
+                })
+                    .then(res => {
+                        if(!res.ok) {
+                            return res.text().then(data => {
+                                throw new Error(data || 'Could not get question');
+                            });
+                        }
+
+                        return res.json();
+                    })
+                    .then(data => {
+
+                        setStore({
+                            currentQuestion: data
+                        })
+
+                    })
+                    .catch(e => {
+                        console.error('Error:', e);
+                        toast(e.message,{type: "error"});
+                        throw e;
+                    });
+            },
+            updateUserCourse: (newUserScore = 0, userCourseId) => {
+                fetchHandler(`/api/usercourse/${userCourseId}/score/${newUserScore}`, {
+                    method: "PATCH",
+                    headers: {
+                        Authorization : `Bearer ${getToken()}`
+                    }
+                })
+                    .then(res => {
+                        if(!res.ok) {
+                            return res.text().then(data => {
+                                throw new Error(data || 'Could not update user course score');
+                            });
+                        }
+
+                        return res.json();
+                    })
+                    .then(data => {
+
+                        setStore({
+                            currentUserCourse: data
+                        })
+
+                    })
+                    .catch(e => {
+                        console.error('Error:', e);
+                        toast(e.message,{type: "error"});
+                        throw e;
+                    });
+            },
+            deleteUserCourse: (userCourseId) => {
+                fetchHandler(`/api/usercourse/${userCourseId}`,
+                    {
+                        method: "DELETE",
+                        headers: {
+                            Authorization : `Bearer ${getToken()}`
+                        }
+                    })
+                    .then(res => {
+                        if(!res.ok) {
+                            return res.text().then(data => {
+                                throw new Error(data || 'Could not delete user course');
+                            });
+                        }
+
+                        return res;
+                    })
+                    .then(data => {
+
+                        setStore({
+                            currentUserCourse: null
+                        })
+
+                        getActions().getAllUserCoursesByUserId(getStore().user?.id)
+
                     })
                     .catch(e => {
                         console.error('Error:', e);

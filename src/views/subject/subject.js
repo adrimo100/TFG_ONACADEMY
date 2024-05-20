@@ -3,7 +3,6 @@ import {useNavigate, useParams} from "react-router";
 import {Context} from "../../store/context";
 
 import "./subject.css"
-import {getToken} from "../../utils/token-handler";
 
 const Subject = () => {
     const navigate = useNavigate();
@@ -20,6 +19,7 @@ const Subject = () => {
     }, []);
 
     useEffect(() => {
+
         if(store.user){
             actions.getAllUserCoursesByUserId(store.user.id);
         }
@@ -28,7 +28,9 @@ const Subject = () => {
 
     const getCourseProgress = (course, userCourse) => {
 
-        return (userCourse.userScore * 100) / course.maxScore;
+        const progress = (userCourse.userScore * 100) / course.maxScore;
+
+        return progress >= 100 ? 100 : progress
     }
 
 
@@ -143,7 +145,7 @@ const Subject = () => {
                 </div>
                 <div>
                     <strong>Descripción: </strong>
-                    <span>{store.currentSubject?.description}</span>
+                    <span>{store.currentSubject?.description || "Sin descripción"}</span>
                 </div>
             </div>
             <div className="courses-list">

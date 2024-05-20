@@ -21,7 +21,7 @@ const Navbar = () => {
         )
 
         const logged = <div className="d-flex justify-content-end">
-            <button className="btn btn-warning me-2" type="button" onClick={() => actions.closeSession()}>Cerrar sesión
+            <button className="btn btn-secondary me-2" type="button" onClick={() => actions.closeSession()}>Cerrar sesión
             </button>
         </div>
 

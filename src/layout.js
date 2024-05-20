@@ -5,6 +5,7 @@ import { Navbar } from "./components"
 import { Footer } from "./components/footer/footer";
 import { Toaster } from "react-hot-toast";
 import Subject from "./views/subject/subject";
+import Course from "./views/course/course";
 
 const lyoutStyles = {
     width: "100%",
@@ -26,6 +27,7 @@ const Layout = () => {
                     <Route path="/register" element={<Register/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/subject/:subjectId" element={<Subject/>}/>
+                    <Route path="/subject/:subjectId/course/:courseId" element={<Course/>}/>
                     <Route path="*" element={<h1>Not Found</h1>}/>
                 </Routes>
                 <Toaster

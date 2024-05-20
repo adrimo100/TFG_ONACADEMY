@@ -1,0 +1,109 @@
+.course-page {
+    background-color: rgb(255, 168, 0);
+    padding: 0;
+    margin: 0;
+
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.course {
+    width: 95%;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px
+}
+
+.question-card{
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.question-card__answers{
+    width: 100%;
+
+    padding: 10px;
+}
+
+.answer-card {
+    background: white;
+
+    border-radius: 5px;
+
+}
+
+.answer-card:hover {
+    border: 3px solid gray;
+
+    border-radius: 5px;
+}
+
+.isSelected {
+    background-color: slategray;
+}
+
+.isCorrect {
+    background-color: lightgreen;
+}
+
+.isIncorrect {
+    background-color: lightcoral;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.question-card {
+    background: #2B3035;
+    width: 75%;
+    min-height: 50px;
+
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+
+    display: flex;
+    flex-direction: column;
+
+    padding:10px
+}
+
+.course-control {
+    height: fit-content;
+    width: 20%;
+
+    background: white;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+
+    padding: 10px
+}
+
+.course-control__buttons {
+    gap: 5px;
+}
+
+@media screen and (max-width: 950px) {
+    .course {
+        flex-direction: column-reverse;
+
+        align-items: center;
+    }
+
+    .course-control {
+        width: 75%;
+    }
+
+    .course-control__buttons {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
